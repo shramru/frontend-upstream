@@ -1,16 +1,19 @@
 module.exports = function (grunt) {
 
     grunt.initConfig({
+
         shell: {
             options: {
                 stdout: true,
                 stderr: true
             },
-            server: {
-                command: 'node server.js'
+
+            dev: {
+                command: 'node server'
             }
         },
         fest: {
+
             templates: {
                 files: [{
                     expand: true,
@@ -33,29 +36,22 @@ module.exports = function (grunt) {
                 files: ['templates/*.xml'],
                 tasks: ['fest'],
                 options: {
-                    interrupt: true,
+                    spawn: false,
                     atBegin: true
-                }
-            },
-            server: {
-                files: [
-                    'public_html/js/**/*.js',
-                    'public_html/css/**/*.css'
-                ],
-                options: {
-                    livereload: true
-                }
+                },
             }
         },
+
         concurrent: {
-            target: ['watch', 'shell'],
+            dev: ['shell', 'watch'],
             options: {
                 logConcurrentOutput: true
             }
         },
+
         qunit: {
             all: ['./public_html/tests/index.html']
-        }
+        },
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
