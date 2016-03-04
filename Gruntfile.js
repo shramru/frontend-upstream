@@ -36,8 +36,7 @@ module.exports = function (grunt) {
                 files: ['templates/*.xml'],
                 tasks: ['fest'],
                 options: {
-                    spawn: false,
-                    atBegin: true
+                    spawn: false
                 },
             }
         },
